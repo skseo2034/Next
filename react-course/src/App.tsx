@@ -3,17 +3,17 @@ import AllMeetupsPage from './pages/AllMeetupsPage';
 import NewMeetupPage from './pages/NewMeetupPage';
 import FavoritesPage from './pages/FavoritesPage';
 import MainNavigation from './components/layout/MainNavigation';
+import Layout from './components/layout/Layout';
 
 function App() {
 	return (
-		<div>
-			<MainNavigation />
+		<Layout>
 			<Routes>
 				<Route path="/" element={<AllMeetupsPage />} />
 				<Route path="/new-meetup" element={<NewMeetupPage />} />
 				<Route path="/favorites" element={<FavoritesPage />} />
 			</Routes>
-		</div>
+		</Layout>
 	);
 }
 
