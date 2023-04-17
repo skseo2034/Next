@@ -47,3 +47,6 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ### 참고사항
 1. 파일 업로드 참고 : https://academind.com/tutorials/reactjs-image-upload/
+2. 백엔드는 firbase 로 한다.
+    - 구글 > firebase > 프로젝트 생성 > 분석모드 제외 > 데이터 베이스 생성 (테스트 모드) > url 확인(이 url 이 백엔드 api url 임)
+    - https://react-getting-started-373c1-default-rtdb.firebaseio.com

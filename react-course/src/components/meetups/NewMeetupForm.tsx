@@ -1,8 +1,12 @@
-import React, { useRef } from 'react';
+import React, { FC, useRef } from 'react';
 import classes from './NewMeetupForm.module.css';
 import Card from '../ui/Card';
+import { MeetupData } from '../../interface/CommonInterface';
 
-const NewMeetupForm = () => {
+interface Props {
+	onAddMeetup: (meetupData: MeetupData) => void;
+}
+const NewMeetupForm: FC<Props> = ({ onAddMeetup }) => {
 	// 입력값을 처리하는 방법은 2가지가 있다. onChange 를 이용하여
 	// useState 에 값을 세팅하는 방법과. useRef 를 사용하는 방법
 	// 여기에서는 입력시 한 번만 필요하므로 useRef 를 사용한다.
@@ -36,7 +40,8 @@ const NewMeetupForm = () => {
 			address: enteredAddress,
 			description: enteredDescription,
 		};
-		console.log('meetupData', meetupData);
+		// console.log('meetupData', meetupData);
+		onAddMeetup(meetupData);
 	};
 
 	return (
