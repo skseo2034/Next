@@ -34,7 +34,7 @@ const NewMeetupForm: FC<Props> = ({ onAddMeetup }) => {
 		if (descriptionInputRef.current) {
 			enteredDescription = descriptionInputRef.current.value;
 		}
-		const meetupData = {
+		const meetupData: MeetupData = {
 			title: enteredTitle,
 			image: enteredImage,
 			address: enteredAddress,

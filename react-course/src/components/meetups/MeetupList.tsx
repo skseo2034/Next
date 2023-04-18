@@ -1,16 +1,10 @@
 import React, { FC } from 'react';
 import classes from './MeetupList.module.css';
 import MeetupItem from './MeetupItem';
+import { MeetupData } from '../../interface/CommonInterface';
 
-interface meetup {
-	id: string;
-	image: string;
-	title: string;
-	address: string;
-	description: string;
-}
 interface Props {
-	meetups: meetup[];
+	meetups: MeetupData[];
 }
 const MeetupList: FC<Props> = ({ meetups }) => {
 	console.log(meetups);
