@@ -11,6 +11,7 @@ module.exports = {
 		'plugin:@typescript-eslint/recommended',
 		'react-app',
 		'react-app/jest',
+		'next/core-web-vitals',
 	],
 	plugins: ['prettier', '@typescript-eslint'],
 	rules: {
