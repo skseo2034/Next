@@ -1,9 +1,10 @@
 import React from 'react';
 import { getFeaturedEvents } from '@/dummy-data';
 import EventList from '@/components/events/EventList';
+import { EventItemInterface } from '@/interfaces/CommonInterface';
 
 const HomePage = () => {
-	const featuredEvents = getFeaturedEvents();
+	const featuredEvents: EventItemInterface[] = getFeaturedEvents();
 	return (
 		<div>
 			<EventList items={featuredEvents} />
