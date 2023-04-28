@@ -7,6 +7,7 @@ interface Props {
 	items: EventItemInterface[];
 }
 const EventList: FC<Props> = props => {
+	console.log('EventList props', props);
 	const { items } = props;
 	return (
 		<ul className={classes.list}>
