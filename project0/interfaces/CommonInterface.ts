@@ -7,3 +7,8 @@ export interface EventItemInterface {
 	description?: string;
 	isFeatured?: boolean;
 }
+
+export interface DateFilterInterface {
+	year: number;
+	month: number;
+}

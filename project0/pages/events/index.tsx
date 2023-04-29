@@ -11,7 +11,7 @@ const AllEventsPage = () => {
 	const findEventsHandler = (year: string, month: string) => {
 		console.log('aaa', year, month);
 		const fullPath = `/events/${year}/${month}`;
-		router.push(fullPath).then(r => console.log(r));
+		router.push(fullPath).then(r => console.log('seo', r));
 	};
 	return (
 		<>

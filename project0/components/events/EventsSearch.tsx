@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, useRef } from 'react';
+import React, { FC, FormEvent, useLayoutEffect, useRef } from 'react';
 import Button from '@/components/ui/Button';
 import classes from './EventsSearch.module.css';
 import { EventItemInterface } from '@/interfaces/CommonInterface';
@@ -6,20 +6,19 @@ import { EventItemInterface } from '@/interfaces/CommonInterface';
 interface Props {
 	onSearch: (selectedYear: string, selectedMonth: string) => void;
 }
-interface Props {
-	items: EventItemInterface[];
-}
 
 const EventsSearch: FC<Props> = (props: Props) => {
 	console.log('EventsSearch props', props);
-	const yearInputRef = useRef(null);
-	const monthInputRef = useRef(null);
+	const yearInputRef = useRef<HTMLSelectElement>(null);
+	const monthInputRef = useRef<HTMLSelectElement>(null);
+
 	const submitHandler = (e: FormEvent) => {
 		e.preventDefault();
 		// 선택된 값을 가직 오는 방법은 2가지가 있다. useRef, useState
 		// 여기에서는 선택된 value 값은 모두 양식이 제출되었을 시 한 번만 보니까 ref를 사용한다.
-		const selectedYear = yearInputRef.current.value;
-		const selectedMonth = monthInputRef.current.value;
+
+		const selectedYear = yearInputRef.current ? yearInputRef.current.value : '';
+		const selectedMonth = monthInputRef.current ? monthInputRef.current.value : '';
 
 		props.onSearch(selectedYear, selectedMonth);
 	};

@@ -1,3 +1,5 @@
+import { DateFilterInterface } from '@/interfaces/CommonInterface';
+
 const DUMMY_EVENTS = [
 	{
 		id: 'e1',
@@ -39,12 +41,9 @@ export function getAllEvents() {
 	return DUMMY_EVENTS;
 }
 
-interface DateFilterInterface {
-	year: number;
-	month: number;
-}
 export function getFilteredEvents(dateFilter: DateFilterInterface) {
 	const { year, month } = dateFilter;
+	console.log('getFilteredEvents dateFilter', dateFilter);
 
 	const filteredEvents = DUMMY_EVENTS.filter(event => {
 		const eventDate = new Date(event.date);

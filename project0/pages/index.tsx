@@ -8,9 +8,9 @@ import AllEventsPage from '@/pages/events';
 const HomePage = () => {
 	const featuredEvents: EventItemInterface[] = getFeaturedEvents();
 	return (
-		<>
-			<AllEventsPage />
-		</>
+		<div>
+			<EventList items={featuredEvents} />
+		</div>
 	);
 };
 
