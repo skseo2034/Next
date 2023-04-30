@@ -36,13 +36,3 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-
-### 프로젝트 생성
--. npx create-next-app@latest --typescript
-
-### 참고
--. ESLint: Please specify path to 'eslint' package : https://samtao.tistory.com/28
-    - npm install --g eslint
-    - intellij 재시작
--. 위 설치 후 다른 오류 발생시 eslint 삭제후 재설치 8.22.0 버전으로
