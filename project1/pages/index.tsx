@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs/promises';
 import { FC } from 'react';
+import Link from 'next/link';
 
 interface product {
 	id: string;
@@ -16,7 +17,9 @@ const HomePage: FC<Props> = (props: Props) => {
 	return (
 		<ul>
 			{products.map(product => (
-				<li key={product.id}>{product.title}</li>
+				<li key={product.id}>
+					<Link href={`/${product.id}`}>{product.title}</Link>
+				</li>
 			))}
 		</ul>
 	);
@@ -25,7 +28,7 @@ const HomePage: FC<Props> = (props: Props) => {
 // 이 컴포넌트를 생성하기 전에, Next.js 가 이 페이지를 사전 랜더링한기 전에 데이터를 프리페치 해야 한다.
 // getStaticProps 함수가 있으면, 이것을 먼저 실행하고 컴포넌트의 함수를 실행 한다.
 // export const getStaticProps = async () => {
-export async function getStaticProps(context) {
+export async function getStaticProps(context: any) {
 	// context 는 지금은 사용안함. 페이지에 대한 추가 매개변수 동적매개변수, 동적경로 세트먼트 값응 얻는데 사용된다.
 	console.log('(Re-)Generataing...', new Date().toLocaleTimeString('ko-KR'), context);
 	// process.cwd() 현재 작업중인 디렉토리 page 가 아닌다. Next.js 는 이 파일이 실행 될때 모든 파일을 루트 디렉토리에 있는것 처럼 취급한다.
