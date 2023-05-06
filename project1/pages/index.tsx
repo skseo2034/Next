@@ -11,8 +11,7 @@ interface product {
 interface Props {
 	products: product[];
 }
-// const HomePage = (props: { products: [{ id: string; title: string; description: string }] }) => {
-const HomePage: FC<Props> = (props: Props) => {
+const HomePage = (props: { products: [{ id: string; title: string; description: string }] }) => {
 	const { products } = props;
 	return (
 		<ul>
