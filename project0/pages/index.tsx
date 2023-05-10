@@ -2,16 +2,37 @@ import React from 'react';
 import { getFeaturedEvents } from '@/dummy-data';
 import EventList from '@/components/events/EventList';
 import { EventItemInterface } from '@/interfaces/CommonInterface';
-import EventsSearch from '@/components/events/EventsSearch';
-import AllEventsPage from '@/pages/events';
+import axios from 'axios';
 
-const HomePage = () => {
-	const featuredEvents: EventItemInterface[] = getFeaturedEvents();
+const HomePage = (props: { featuredEvents: EventItemInterface[] }) => {
 	return (
 		<div>
-			<EventList items={featuredEvents} />
+			<EventList items={props.featuredEvents} />
 		</div>
 	);
+};
+
+export const getServerSideProps = async (conext: any) => {
+	const response = await axios.get('https://nextjs-course-3cf33-default-rtdb.firebaseio.com/events.json');
+	const data = response.data;
+	const featuredEvents: EventItemInterface[] = [];
+
+	for (const key in data) {
+		if (data[key].isFeatured) {
+			featuredEvents.push({
+				id: key,
+				title: data[key].title,
+				description: data[key].description,
+				location: data[key].location,
+				date: data[key].date,
+				image: data[key].image,
+				isFeatured: data[key].isFeatured,
+			});
+		}
+	}
+
+	// return { props: { sales: transformedSales }, revalidate: 10 };
+	return { props: { featuredEvents: featuredEvents } };
 };
 
 export default HomePage;
