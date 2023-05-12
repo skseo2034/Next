@@ -1,8 +1,8 @@
 import React from 'react';
-import { getFeaturedEvents } from '@/dummy-data';
 import EventList from '@/components/events/EventList';
 import { EventItemInterface } from '@/interfaces/CommonInterface';
 import axios from 'axios';
+import { getFeaturedEvents } from '@/helpers/api-utils';
 
 const HomePage = (props: { featuredEvents: EventItemInterface[] }) => {
 	return (
@@ -12,7 +12,16 @@ const HomePage = (props: { featuredEvents: EventItemInterface[] }) => {
 	);
 };
 
-export const getServerSideProps = async (conext: any) => {
+export const getStaticProps = async () => {
+	const featuredEvents = await getFeaturedEvents();
+	return {
+		props: {
+			featuredEvents: featuredEvents,
+		},
+	};
+};
+
+/*export const getServerSideProps = async (conext: any) => {
 	const response = await axios.get('https://nextjs-course-3cf33-default-rtdb.firebaseio.com/events.json');
 	const data = response.data;
 	const featuredEvents: EventItemInterface[] = [];
@@ -33,6 +42,6 @@ export const getServerSideProps = async (conext: any) => {
 
 	// return { props: { sales: transformedSales }, revalidate: 10 };
 	return { props: { featuredEvents: featuredEvents } };
-};
+};*/
 
 export default HomePage;
