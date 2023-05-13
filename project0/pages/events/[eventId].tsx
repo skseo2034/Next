@@ -1,38 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { getEventById } from '@/dummy-data';
 import EventSummary from '@/components/event-detail/event-summary';
 import EventLogistics from '@/components/event-detail/event-logistics';
 import EventContent from '@/components/event-detail/event-content';
 import ErrorAlert from '@/components/ui/ErrorAlert';
 import Button from '@/components/ui/Button';
-import axios from 'axios';
 
 import { EventItemInterface } from '@/interfaces/CommonInterface';
+import { getAllEvents, getEventById, getFeaturedEvents } from '@/helpers/api-utils';
 
-const EventDetailpage = () => {
-	const router = useRouter();
-	const eventId = router.query.eventId;
-	const [event, setEvent] = useState<EventItemInterface>();
+const EventDetailpage = (props: { selectedEvent: EventItemInterface }) => {
+	const event = props.selectedEvent;
 
-	useEffect(() => {
-		const response = axios
-			.get('https://nextjs-course-3cf33-default-rtdb.firebaseio.com/events.json')
-			.then(res => setEvent(res.data));
-	}, []);
-
-	if (!event) {
+	// fallback: true 일때 필요, blocking 일때는 필요없음
+	/*if (!event) {
 		return (
-			<>
-				<ErrorAlert>
-					<p>No event found!</p>
-				</ErrorAlert>
-				<div className="center">
-					<Button link="/events">Show All Events</Button>
-				</div>
-			</>
+			<div className="center">
+				<p>Loading...</p>
+			</div>
 		);
-	}
+	}*/
 	return (
 		<>
 			<EventSummary title={event.title} />
@@ -44,4 +31,23 @@ const EventDetailpage = () => {
 	);
 };
 
+export const getStaticProps = async (context: any) => {
+	const eventId = context.params.eventId;
+
+	const event = await getEventById(eventId);
+	return {
+		props: { selectedEvent: event },
+		revalidate: 30,
+	};
+};
+
+export const getStaticPaths = async () => {
+	const events = await getFeaturedEvents();
+
+	const paths = events.map(event => ({ params: { eventId: event.id } }));
+	return {
+		paths: paths,
+		fallback: 'blocking',
+	};
+};
 export default EventDetailpage;

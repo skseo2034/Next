@@ -11,7 +11,7 @@ interface Prpos {
 	imageAlt: string;
 }
 
-const EventLogistics: FC<Prpos> = props => {
+const EventLogistics = (props: Prpos) => {
 	const { date, address, image, imageAlt } = props;
 
 	const humanReadableDate = new Date(date).toLocaleDateString('en-US', {
@@ -19,7 +19,7 @@ const EventLogistics: FC<Prpos> = props => {
 		month: 'long',
 		year: 'numeric',
 	});
-	const addressText = address.replace(', ', '\n');
+	const addressText = ''; //address.replace(', ', '\n');
 
 	return (
 		<section className={classes.logistics}>
