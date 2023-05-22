@@ -39,7 +39,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 
 ### 프로젝트 생성
--. npx create-next-app@latest --typescript
+-. npx create-next-app@latest --typescript (npx create-next-app@latest 이것만 해도 됨)  
 -. TypeError: this.libOptions.parse is not a function 오류시 
     - package.json 수정 "eslint": "8.22.0"
     - rm -rf node_modules;rm package-lock.json;npm i 실행
@@ -55,3 +55,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
     - npm ls -g --depth=0
 -. Typescript 적용 안될때, 타입 오류 실시간 체킹 안될때.
     - Intellij IDE 하단 Typescript 확인 : starting 이거나, 버젼없이 Typscript 만 보일때, 클릭하여 bultin Typescript 로 지정한다.
+-. next Image 사용시 heigth, width 설정 참고
+    - css 에 rem 을 px 로 환산, 폰트 사이즈따라 다름.
+    - http://pxtoem.com/ 참조
+    - 변경해도 이미지가 흐리다면, 수동으로 조정해서 보면서 변경해야 한다.

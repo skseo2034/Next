@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { EventItemInterface } from '@/interfaces/CommonInterface';
+import { DateFilterInterface, EventItemInterface } from '@/interfaces/CommonInterface';
 
 export const getAllEvents = async () => {
 	const response = await axios.get('https://nextjs-course-3cf33-default-rtdb.firebaseio.com/events.json');
@@ -33,4 +33,15 @@ export const getFeaturedEvents = async () => {
 export const getEventById = async (id: string) => {
 	const allEvents = await getAllEvents();
 	return allEvents.find(event => event.id === id);
+};
+
+export const getFilteredEvents = async (dateFilter: DateFilterInterface) => {
+	const { year, month } = dateFilter;
+	const allEvents = await getAllEvents();
+	const filteredEvents = allEvents.filter(event => {
+		const eventDate = new Date(event.date);
+		return eventDate.getFullYear() === year && eventDate.getMonth() === month - 1;
+	});
+
+	return filteredEvents;
 };

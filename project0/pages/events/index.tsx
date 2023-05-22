@@ -5,18 +5,18 @@ import { useRouter } from 'next/router';
 import { getAllEvents } from '@/helpers/api-utils';
 import { EventItemInterface } from '@/interfaces/CommonInterface';
 
-const AllEventsPage = () => {
+const AllEventsPage = (props: { events: EventItemInterface[] }) => {
 	const router = useRouter();
-	const [events, setEvents] = useState<EventItemInterface[]>([]);
-	// const events = await getAllEvents();
-	useEffect(() => {
+	//const [events, setEvents] = useState<EventItemInterface[]>([]);
+	const events = props.events;
+	/*useEffect(() => {
 		async function getData() {
 			return await getAllEvents();
 		}
 		getData().then(res => {
 			setEvents(res);
 		});
-	}, []);
+	}, []);*/
 
 	const findEventsHandler = (year: string, month: string) => {
 		const fullPath = `/events/${year}/${month}`;
@@ -30,4 +30,14 @@ const AllEventsPage = () => {
 	);
 };
 
+export const getStaticProps = async () => {
+	const events = await getAllEvents();
+
+	return {
+		props: {
+			events: events,
+		},
+		revalidate: 60,
+	};
+};
 export default AllEventsPage;
