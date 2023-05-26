@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import path from 'path';
 import fs from 'fs';
 import { MongoClient } from 'mongodb';
+import { connectDatabase, insertDocument } from '@/helpers/db-utils';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === 'POST') {
@@ -11,13 +12,22 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 			return;
 		}
 
-		const client = await MongoClient.connect(
-			'mongodb+srv://skseo:pp486958@cluster1.ckq3wm9.mongodb.net/newsletter?retryWrites=true&w=majority'
-		);
-		const db = client.db();
-		await db.collection('emails').insertOne({ email: userEmail });
+		let client;
+		try {
+			client = await connectDatabase();
+		} catch (error) {
+			res.status(500).json({ message: 'Connecting to the database failed!' });
+			return; // 아래 코드가 실행되면 안되므로 return 함.
+		}
 
-		await client.close();
+		try {
+			await insertDocument(client, 'newsletter', { email: userEmail });
+			await (client as MongoClient).close();
+		} catch (error) {
+			res.status(500).json({ message: 'Inserting data failed!' });
+			return;
+		}
+
 		res.status(201).json({ message: 'Signed up!' });
 	} else {
 		// res.status(200).json();

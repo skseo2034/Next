@@ -1,8 +1,18 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios/index';
+import { MongoClient } from 'mongodb';
+import { connectDatabase, getAllDocuments, insertDocument } from '@/helpers/db-utils';
 
-const handler = (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	const eventId = req.query.eventId;
+
+	let client;
+	try {
+		client = await connectDatabase();
+	} catch (error) {
+		res.status(500).json({ message: 'Connecting to the database failed!' });
+		return;
+	}
 
 	if (req.method === 'POST') {
 		// add server-side validation
@@ -12,26 +22,35 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
 			return;
 		}
 
+		let _id: any;
 		const newComment = {
-			id: new Date().toISOString(),
 			email,
 			name,
 			text,
+			eventId,
+			_id,
 		};
 
-		console.log('api comments eventsId Post >>>> ', newComment);
-		res.status(201).json({ message: 'Added comment. ', comment: newComment });
+		let result;
+		try {
+			result = await insertDocument(client, 'comments', newComment);
+			newComment._id = result.insertedId;
+			res.status(201).json({ message: 'Added comment. ', comment: newComment });
+		} catch (error) {
+			res.status(500).json({ message: 'Inserting data failed!' });
+		}
 	}
 
 	if (req.method === 'GET') {
-		const dummyList = [
-			{ id: 'c1', name: '홍길동1', text: '와우1' },
-			{ id: 'c2', name: '홍길동2', text: '와우2' },
-			{ id: 'c3', name: '홍길동3', text: '와우3' },
-		];
-		res.status(200).json({ comments: dummyList });
+		try {
+			const documents = await getAllDocuments(client, 'comments', { _id: -1 });
+			res.status(200).json({ comments: documents });
+		} catch (error) {
+			res.status(500).json({ message: 'Getting comments failed!' });
+		}
 	}
-	// const commentList = axios.post('/api/newsletter').then(response => console.log(response.data));
+
+	await client.close();
 };
 
 export default handler;

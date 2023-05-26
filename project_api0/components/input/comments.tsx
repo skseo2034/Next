@@ -5,7 +5,7 @@ import NewComment from './new-comment';
 import classes from './comments.module.css';
 import axios from 'axios';
 interface itemType {
-	id: string;
+	_id: string;
 	name: string;
 	text: string;
 }
