@@ -14,9 +14,10 @@ export const insertDocument = async (client: MongoClient, collection: string, do
 	return result;
 };
 
-export const getAllDocuments = async (client: MongoClient, collection: string, sort: any) => {
+// filter 을 적용하여 특정 eventId 의 댓글만 가져온다.
+export const getAllDocuments = async (client: MongoClient, collection: string, sort: any, filter = {}) => {
 	const db = await client.db();
-	const documents = await db.collection(collection).find().sort(sort).toArray();
+	const documents = await db.collection(collection).find(filter).sort(sort).toArray();
 
 	return documents;
 };
