@@ -12,18 +12,20 @@ interface itemType {
 }
 function Comments(props: { eventId: string }) {
 	const { eventId } = props;
+	const notificationCtx = useContext(NotificationContext);
 
 	const [showComments, setShowComments] = useState(false);
 	const [comments, setComments] = useState<itemType[]>([]);
-	const notificationCtx = useContext(NotificationContext);
+	const [isFetchingComments, setIsFetchingComments] = useState(false);
 
 	useEffect(() => {
 		if (showComments) {
-			notificationCtx.showNotification({
-				title: 'Getting Comments...',
-				message: 'Getting Comment for event',
+			setIsFetchingComments(true);
+			/*notificationCtx.showNotification({
+				title: 'Loading Comments...',
+				message: 'Loading Comments in this event',
 				status: 'pending',
-			});
+			});*/
 			fetch(`/api/comments/${eventId}`)
 				.then(response => {
 					if (response.ok) {
@@ -35,19 +37,20 @@ function Comments(props: { eventId: string }) {
 					});
 				})
 				.then(data => {
-					notificationCtx.showNotification({
+					/*notificationCtx.showNotification({
 						title: 'Success!',
-						message: 'Successfully Getting comments that this Event',
+						message: 'Successfully Loaded comments in this Event',
 						status: 'success',
-					});
+					});*/
 					setComments(data.comments);
+					setIsFetchingComments(false);
 				})
 				.catch(error => {
-					notificationCtx.showNotification({
+					/*notificationCtx.showNotification({
 						title: 'Error!',
 						message: error.message || 'Something went wrong!',
 						status: 'error',
-					});
+					});*/
 				});
 		}
 	}, [showComments]);
@@ -58,8 +61,8 @@ function Comments(props: { eventId: string }) {
 
 	const addCommentHandler = (commentData: { email: string; name: string; text: string }) => {
 		notificationCtx.showNotification({
-			title: 'Adding Comment...',
-			message: 'Adding Comment for event',
+			title: 'Sending Comment...',
+			message: 'Your comment is currently being stored into a database.',
 			status: 'pending',
 		});
 
@@ -82,7 +85,7 @@ function Comments(props: { eventId: string }) {
 			.then(data => {
 				notificationCtx.showNotification({
 					title: 'Success!',
-					message: 'Successfully registered for newsletter!',
+					message: 'Your comment was saved!',
 					status: 'success',
 				});
 			})
@@ -98,7 +101,7 @@ function Comments(props: { eventId: string }) {
 			.then(response => {
 				notificationCtx.showNotification({
 					title: 'Success!',
-					message: 'Successfully registered for newsletter!',
+					message: 'Your comment was saved!',
 					status: 'success',
 				});
 				return response.data;
@@ -116,7 +119,8 @@ function Comments(props: { eventId: string }) {
 		<section className={classes.comments}>
 			<button onClick={toggleCommentsHandler}>{showComments ? 'Hide' : 'Show'} Comments</button>
 			{showComments && <NewComment onAddComment={addCommentHandler} />}
-			{showComments && <CommentList items={comments} />}
+			{showComments && !isFetchingComments && <CommentList items={comments} />}
+			{showComments && isFetchingComments && <p>Loading...</p>}
 		</section>
 	);
 }
