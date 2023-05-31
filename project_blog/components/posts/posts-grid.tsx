@@ -1,8 +1,8 @@
 import classes from './posts-grid.module.css';
 import PostItem from './post-item';
-import { postType } from '@/commonTypes/common-types';
+import { PostType } from '@/commonTypes/common-types';
 
-const PostsGrid = (props: { posts: postType[] }) => {
+const PostsGrid = (props: { posts: PostType[] }) => {
 	const { posts } = props;
 	return (
 		<ul className={classes.grid}>

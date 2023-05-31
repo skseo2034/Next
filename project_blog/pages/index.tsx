@@ -1,9 +1,9 @@
 import FeaturedPosts from '@/components/home-page/featured-posts';
 import Hero from '@/components/home-page/hero';
 import React from 'react';
-import { postType } from '@/commonTypes/common-types';
+import { PostType } from '@/commonTypes/common-types';
 
-const DUMMY_POSTS: postType[] = [
+const DUMMY_POSTS: PostType[] = [
 	{
 		slug: 'getting-stared-with-nextjs',
 		title: 'Getting Started with NextJS',
