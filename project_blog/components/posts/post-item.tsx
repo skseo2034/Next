@@ -2,9 +2,9 @@ import Link from 'next/link';
 import classes from './post-item.module.css';
 import Image from 'next/image';
 import React from 'react';
-import { PostType } from '@/commonTypes/common-types';
+import { PostFileType } from '@/commonTypes/common-types';
 
-const PostItem = (props: { post: PostType }) => {
+const PostItem = (props: { post: PostFileType }) => {
 	const { title, image, excerpt, date, slug } = props.post;
 
 	const formattedDate = new Date(date).toLocaleDateString('en-US', {
@@ -14,6 +14,7 @@ const PostItem = (props: { post: PostType }) => {
 	});
 
 	const imagePath = `/images/posts/${slug}/${image}`;
+
 	const linkPath = `/posts/${slug}`;
 	return (
 		<li className={classes.post}>

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { PostType } from '@/commonTypes/common-types';
+import { PostFileType } from '@/commonTypes/common-types';
 
 const postsDirectory = path.join(process.cwd(), 'content/posts');
 
@@ -24,7 +24,8 @@ const getPostsData = (fileName: string) => {
 export const getAllPosts = () => {
 	const postFiles = fs.readdirSync(postsDirectory); // 해당 디렉토리에 모든 파일목록을 가지고 온다.
 
-	const allPosts: { [p: string]: any; slug: string; content: string }[] = postFiles.map(postFile => {
+	// const allPosts: { [p: string]: any; slug: string; content: string }[] = postFiles.map(postFile => {
+	const allPosts: PostFileType[] = postFiles.map(postFile => {
 		return getPostsData(postFile);
 	});
 
@@ -35,7 +36,6 @@ export const getAllPosts = () => {
 
 export const getFeaturedPosts = () => {
 	const allPosts = getAllPosts();
-
 	const featuredPosts = allPosts.filter(post => post.isFeatured);
 
 	return featuredPosts;

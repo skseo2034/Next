@@ -1,8 +1,8 @@
 import classes from './all-posts.module.css';
 import PostsGrid from '@/components/posts/posts-grid';
-import { PostType } from '@/commonTypes/common-types';
+import { PostFileType } from '@/commonTypes/common-types';
 
-const AllPosts = (props: { posts: PostType[] }) => {
+const AllPosts = (props: { posts: PostFileType[] }) => {
 	return (
 		<section className={classes.posts}>
 			<h1>All Posts</h1>
