@@ -6,7 +6,7 @@ import { PostFileType } from '@/commonTypes/common-types';
 
 const PostItem = (props: { post: PostFileType }) => {
 	const { title, image, excerpt, date, slug } = props.post;
-
+	console.log('seo111 >>>>>>>>>>>>>>>>> ', props.post);
 	const formattedDate = new Date(date).toLocaleDateString('en-US', {
 		day: 'numeric',
 		month: 'long',
