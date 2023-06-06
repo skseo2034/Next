@@ -2,9 +2,11 @@ import classes from './post-content.module.css';
 import PostHeader from './post-header';
 import ReactMarkdown from 'react-markdown';
 import Image from 'next/image';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import { PostFileType } from '@/commonTypes/common-types';
 import { NormalComponents } from 'react-markdown/lib/complex-types';
-import { SpecialComponents } from 'react-markdown/lib/ast-to-react';
+import { CodeComponent, SpecialComponents } from 'react-markdown/lib/ast-to-react';
 
 const PostContent = (props: { post: PostFileType }) => {
 	const { post } = props;
@@ -14,9 +16,16 @@ const PostContent = (props: { post: PostFileType }) => {
 		img(image: any) {
 			return <Image src={`/images/posts/${post.slug}/${image.src}`} alt={image.alt} width={600} height={300} />;
 		},
+
+		code(code: any) {
+			const { className, children } = code;
+			console.log('seo >>>>>>>>>>>>>>>>> ', code, code.className, code.children);
+
+			// eslint-disable-next-line react/no-children-prop
+			return <SyntaxHighlighter style={atomDark} language={className} children={children} />;
+		},
 	};
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
+
 	return (
 		<article className={classes.content}>
 			<PostHeader title={post.title} image={imagePath} />
