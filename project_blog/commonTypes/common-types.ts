@@ -5,8 +5,8 @@ export interface PostFileType {
 }
 
 export interface PostType extends PostFileType {
-	title: string;
-	image: string;
-	excerpt: string;
-	date: string;
+	title?: string;
+	image?: string;
+	excerpt?: string;
+	date?: string;
 }

@@ -19,7 +19,6 @@ const PostContent = (props: { post: PostFileType }) => {
 
 		code(code: any) {
 			const { className, children } = code;
-			console.log('seo >>>>>>>>>>>>>>>>> ', code, code.className, code.children);
 
 			// eslint-disable-next-line react/no-children-prop
 			return <SyntaxHighlighter style={atomDark} language={className} children={children} />;

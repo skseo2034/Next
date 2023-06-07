@@ -1,10 +1,20 @@
 import PostContent from '@/components/posts/post-detail/post-content';
 import { GetStaticPropsContext, NextPageContext } from 'next';
 import { getPostFiles, getPostsData } from '@/helpers/posts-util';
-import { PostFileType } from '@/commonTypes/common-types';
+import { PostType } from '@/commonTypes/common-types';
+import Head from 'next/head';
+import React from 'react';
 
-const PostDetialPage = (props: { post: PostFileType }) => {
-	return <PostContent post={props.post} />;
+const PostDetialPage = (props: { post: PostType }) => {
+	return (
+		<>
+			<Head>
+				<title>{props.post.title}</title>
+				<meta name="description" content={props.post.excerpt} />
+			</Head>
+			<PostContent post={props.post} />)
+		</>
+	);
 };
 
 export const getStaticProps = (context: any) => {

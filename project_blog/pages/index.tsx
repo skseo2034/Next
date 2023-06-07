@@ -3,10 +3,16 @@ import Hero from '@/components/home-page/hero';
 import React from 'react';
 import { PostFileType, PostType } from '@/commonTypes/common-types';
 import { getFeaturedPosts } from '@/helpers/posts-util';
+import Head from 'next/head';
 
+// 페이지별 메타 데이터는 각각의 표기하면 된다.
 const Homepage = (props: { posts: PostFileType[] }) => {
 	return (
 		<>
+			<Head>
+				<title>Seo and choco`s Blog, Seo is father and choco is son</title>
+				<meta name="description" content="I post about programming and web development." />
+			</Head>
 			<Hero />
 			<FeaturedPosts posts={props.posts} />
 		</>

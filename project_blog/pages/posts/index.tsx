@@ -1,10 +1,19 @@
 import React from 'react';
 import AllPosts from '@/components/posts/all-posts';
-import { PostFileType, PostType } from '@/commonTypes/common-types';
+import { PostType } from '@/commonTypes/common-types';
 import { getAllPosts, getFeaturedPosts } from '@/helpers/posts-util';
+import Head from 'next/head';
 
-const AllPostsPage = (props: { posts: PostFileType[] }) => {
-	return <AllPosts posts={props.posts} />;
+const AllPostsPage = (props: { posts: PostType[] }) => {
+	return (
+		<>
+			<Head>
+				<title>All Posts</title>
+				<meta name="description" content="A list of all programming-related tutorials ans posts!" />
+			</Head>
+			<AllPosts posts={props.posts} />
+		</>
+	);
 };
 
 export const getStaticProps = () => {
