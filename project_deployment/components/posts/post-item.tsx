@@ -2,11 +2,11 @@ import Link from 'next/link';
 import classes from './post-item.module.css';
 import Image from 'next/image';
 import React from 'react';
-import { PostType } from '@/commonTypes/common-types';
+import { PostFileType } from '@/commonTypes/common-types';
 
-const PostItem = (props: { post: PostType }) => {
+const PostItem = (props: { post: PostFileType }) => {
 	const { title, image, excerpt, date, slug } = props.post;
-	console.log('seo111 >>>>>>>>>>>>>>>>> ', props.post);
+
 	const formattedDate = new Date(date as string).toLocaleDateString('en-US', {
 		day: 'numeric',
 		month: 'long',

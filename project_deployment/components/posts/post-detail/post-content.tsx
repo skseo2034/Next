@@ -4,12 +4,11 @@ import ReactMarkdown from 'react-markdown';
 import Image from 'next/image';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
-import { PostType } from '@/commonTypes/common-types';
+import { PostFileType } from '@/commonTypes/common-types';
 import { NormalComponents } from 'react-markdown/lib/complex-types';
 import { CodeComponent, SpecialComponents } from 'react-markdown/lib/ast-to-react';
 
-const PostContent = (props: { post: PostType }) => {
-	console.log('seo22222222222>>>>>>>>>>>>', props.post);
+const PostContent = (props: { post: PostFileType }) => {
 	const { post } = props;
 	const imagePath = `/images/posts/${post.slug}/${post.image}`;
 
@@ -17,12 +16,12 @@ const PostContent = (props: { post: PostType }) => {
 		img(image: any) {
 			return <Image src={`/images/posts/${post.slug}/${image.src}`} alt={image.alt} width={600} height={300} />;
 		},
-		/*code(code: any) {
+		code(code: any) {
 			const { className, children } = code;
 
 			// eslint-disable-next-line react/no-children-prop
 			return <SyntaxHighlighter style={atomDark} language={className} children={children} />;
-		},*/
+		},
 	};
 
 	return (

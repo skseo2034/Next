@@ -1,0 +1,38 @@
+{
+  "name": "project_blog",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "export": "next export",
+    "ts-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@types/node": "20.2.5",
+    "@types/react": "18.2.7",
+    "@types/react-dom": "18.2.4",
+    "@types/react-syntax-highlighter": "^15.5.7",
+    "@typescript-eslint/eslint-plugin": "^5.59.7",
+    "@typescript-eslint/parser": "^5.59.7",
+    "axios": "^1.4.0",
+    "eslint": "^8.22.0",
+    "eslint-config-next": "13.4.4",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "gray-matter": "^4.0.3",
+    "mongodb": "^5.5.0",
+    "next": "13.4.4",
+    "prettier": "^2.8.8",
+    "react": "18.2.0",
+    "react-app": "^1.1.2",
+    "react-dom": "18.2.0",
+    "react-markdown": "^8.0.7",
+    "react-router-dom": "^6.11.2",
+    "react-syntax-highlighter": "^15.5.0",
+    "swr": "^2.1.5",
+    "typescript": "5.0.4"
+  }
+}

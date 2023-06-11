@@ -1,10 +1,10 @@
 import React from 'react';
 import AllPosts from '@/components/posts/all-posts';
-import { PostType } from '@/commonTypes/common-types';
+import { PostFileType } from '@/commonTypes/common-types';
 import { getAllPosts, getFeaturedPosts } from '@/helpers/posts-util';
 import Head from 'next/head';
 
-const AllPostsPage = (props: { posts: PostType[] }) => {
+const AllPostsPage = (props: { posts: PostFileType[] }) => {
 	return (
 		<>
 			<Head>

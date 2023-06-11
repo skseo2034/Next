@@ -1,7 +1,7 @@
 import FeaturedPosts from '@/components/home-page/featured-posts';
 import Hero from '@/components/home-page/hero';
 import React from 'react';
-import { PostFileType, PostType } from '@/commonTypes/common-types';
+import { PostFileType } from '@/commonTypes/common-types';
 import { getFeaturedPosts } from '@/helpers/posts-util';
 import Head from 'next/head';
 

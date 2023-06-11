@@ -1,6 +1,6 @@
 import classes from './featured-posts.module.css';
 import PostsGrid from '@/components/posts/posts-grid';
-import { PostFileType, PostType } from '@/commonTypes/common-types';
+import { PostFileType } from '@/commonTypes/common-types';
 
 const FeaturedPosts = (props: { posts: PostFileType[] }) => {
 	return (

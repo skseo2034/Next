@@ -1,6 +1,6 @@
 import classes from './posts-grid.module.css';
 import PostItem from './post-item';
-import { PostFileType, PostType } from '@/commonTypes/common-types';
+import { PostFileType } from '@/commonTypes/common-types';
 
 const PostsGrid = (props: { posts: PostFileType[] }) => {
 	const { posts } = props;

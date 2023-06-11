@@ -1,18 +1,22 @@
 import PostContent from '@/components/posts/post-detail/post-content';
 import { GetStaticPropsContext, NextPageContext } from 'next';
 import { getPostFiles, getPostsData } from '@/helpers/posts-util';
-import { PostType } from '@/commonTypes/common-types';
+import { PostFileType } from '@/commonTypes/common-types';
 import Head from 'next/head';
 import React from 'react';
 
-const PostDetialPage = (props: { post: PostType }) => {
+const PostDetialPage = (props: { post: PostFileType }) => {
+	console.log('seo333 >>>>>>>>>>>>>>>>> ', props);
 	return (
 		<>
+			PostDetialPage
 			<Head>
-				<title>{props.post.title as string}</title>
-				<meta name="description" content={props.post.excerpt} />
+				{props.post && <title>{props.post.title}</title>}
+				{props.post && <meta name="description" content={props.post.excerpt} />}
+				{/*<title>{props.post.title}</title>*/}
+				{/*<meta name="description" content={props.post.excerpt} />*/}
 			</Head>
-			<PostContent post={props.post} />
+			{props.post && <PostContent post={props.post} />}
 		</>
 	);
 };
@@ -22,6 +26,7 @@ export const getStaticProps = (context: any) => {
 	const { slug } = params;
 
 	const postData = getPostsData(slug);
+	console.log('seo77777 >>>>>>>>>>>>>>>>> ', postData);
 
 	return {
 		props: {
@@ -37,6 +42,7 @@ export const getStaticPaths = () => {
 	const postFileNames = getPostFiles();
 
 	const slugs = postFileNames.map(fileName => fileName.replace(/\.md$/, ''));
+	console.log('seo8888 >>>>>>>>>>>>>>>>> ', slugs);
 	return {
 		paths: slugs.map(slug => ({ params: { slug: slug } })),
 		fallback: true,

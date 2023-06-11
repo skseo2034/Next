@@ -1,6 +1,5 @@
 import classes from './post-header.module.css';
 import Image from 'next/image';
-import { PostType } from '@/commonTypes/common-types';
 
 const PostHeader = (props: { title: string; image: string }) => {
 	const { title, image } = props;

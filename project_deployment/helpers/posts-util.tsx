@@ -15,12 +15,12 @@ export const getPostsData = (postIdentifier: string) => {
 	const fileContent = fs.readFileSync(filePath, 'utf-8'); // 파일을 읽어온다.
 	const { data, content } = matter(fileContent); // 메터데이터가 있는 data, 실제 내용이 있는 content 프로퍼티 2개를 리턴 한다.
 
+	console.log('seo 555 >>>>>>>>>>>>>>>>> ', data);
 	const postData = {
 		slug: postSlug,
 		...data,
 		content: content,
 	};
-
 	return postData;
 };
 
