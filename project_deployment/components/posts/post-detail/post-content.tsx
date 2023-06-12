@@ -2,11 +2,16 @@ import classes from './post-content.module.css';
 import PostHeader from './post-header';
 import ReactMarkdown from 'react-markdown';
 import Image from 'next/image';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import atomDark from 'react-syntax-highlighter/dist/cjs/styles/prism/atom-dark';
 import { PostFileType } from '@/commonTypes/common-types';
 import { NormalComponents } from 'react-markdown/lib/complex-types';
 import { CodeComponent, SpecialComponents } from 'react-markdown/lib/ast-to-react';
+import js from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript';
+import css from 'react-syntax-highlighter/dist/cjs/languages/prism/css';
+
+SyntaxHighlighter.registerLanguage('js', js);
+SyntaxHighlighter.registerLanguage('css', css);
 
 const PostContent = (props: { post: PostFileType }) => {
 	const { post } = props;
