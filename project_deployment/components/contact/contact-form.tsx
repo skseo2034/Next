@@ -74,7 +74,7 @@ const ContactForm = () => {
 		notification = {
 			status: 'success',
 			title: 'Success!',
-			message: 'Message sent successfully!',
+			message: 'Message sent successfully!!!!!',
 		};
 	}
 
